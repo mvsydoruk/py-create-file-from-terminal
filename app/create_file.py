@@ -4,16 +4,20 @@ from datetime import datetime
 
 
 def create_file(file_path: str) -> None:
-    mode = "a" if os.path.exists(file_path) else "w"
-    with open(file_path, mode) as file:
-        file.write(f'{datetime.now().strftime("%y-%m-%d %H:%M:%S")}\n')
+    with open(file_path, "a") as file_in, open(file_path, "r") as file_out:
+        if file_out.readlines():
+            file_in.write("\n\n")
+        file_in.write(f'{datetime.now().strftime("%y-%m-%d %H:%M:%S")}\n')
         line_number = 1
+        content = []
         while True:
             line_content = input("Enter content line: ")
             if line_content.lower() == "stop":
                 break
-            file.write(f"{line_number} {line_content}\n")
+            content.append(f"{line_number} {line_content}")
             line_number += 1
+        ready_content = "\n".join(content)
+        file_in.write(ready_content)
 
 
 def create_directory(directory_list: list) -> None:
