@@ -25,7 +25,7 @@ def create_directory(directory_list: list) -> None:
     os.makedirs(dir_path, exist_ok=True)
 
 
-if __name__ == "__main__":
+def main() -> None:
     args = sys.argv[1:]
     dir_list = []
     file_name = ""
@@ -44,3 +44,7 @@ if __name__ == "__main__":
             create_file(file_path)
     elif file_name:
         create_file(file_name)
+
+
+if __name__ == "__main__":
+    main()
